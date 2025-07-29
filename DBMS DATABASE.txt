@@ -1,0 +1,56 @@
+ use transport_db;
+Database changed
+mysql> CREATE TABLE buses (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     bus_name VARCHAR(100) NOT NULL,
+    ->     source VARCHAR(50) NOT NULL,
+    ->     destination VARCHAR(50) NOT NULL,
+    ->     departure_time TIME NOT NULL,
+    ->     arrival_time TIME NOT NULL,
+    ->     fare DECIMAL(10,2) NOT NULL,
+    ->     bus_type VARCHAR(50) NOT NULL,
+    ->     stops TEXT NOT NULL
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO buses (bus_name, source, destination, departure_time, arrival_time, fare, bus_type, stops) VALUES
+    -> ('Super Luxury 101', 'Hyderabad', 'Bangalore', '08:00:00', '16:00:00', 1450.00, 'Super Luxury', 'Kurnool, Anantapur, Chikkaballapur'),
+    -> ('Rajdhani 202', 'Hyderabad', 'Bangalore', '10:30:00', '18:30:00', 1850.00, 'AC Rajdhani', 'Kurnool, Anantapur, Chikkaballapur'),
+    -> ('e-Garuda 303', 'Hyderabad', 'Bangalore', '14:00:00', '22:00:00', 2100.00, 'Electric AC', 'Kurnool, Anantapur, Chikkaballapur'),
+    -> ('Express 404', 'Hyderabad', 'Vijayawada', '07:00:00', '11:30:00', 620.00, 'Express', 'Nalgonda, Suryapet, Kodad'),
+    -> ('Super Luxury 505', 'Hyderabad', 'Vijayawada', '09:15:00', '13:45:00', 830.00, 'Super Luxury', 'Nalgonda, Suryapet, Kodad'),
+    -> ('Rajdhani 606', 'Hyderabad', 'Vijayawada', '12:00:00', '16:30:00', 950.00, 'AC Rajdhani', 'Nalgonda, Suryapet, Kodad'),
+    -> ('Garuda Plus 707', 'Hyderabad', 'Chennai', '17:00:00', '06:00:00', 2300.00, 'AC Multi-Axle', 'Kurnool, Nellore, Tirupati'),
+    -> ('Super Luxury 808', 'Hyderabad', 'Chennai', '18:30:00', '07:30:00', 1750.00, 'Super Luxury', 'Kurnool, Nellore, Tirupati'),
+    -> ('Deluxe 909', 'Hyderabad', 'Warangal', '06:30:00', '09:00:00', 360.00, 'Deluxe', 'Uppal, Jangaon'),
+    -> ('e-Metro 1010', 'Hyderabad', 'Warangal', '08:45:00', '11:15:00', 470.00, 'Electric Non-AC', 'Uppal, Jangaon'),
+    -> ('Express 1111', 'Hyderabad', 'Nizamabad', '07:30:00', '10:30:00', 500.00, 'Express', 'Medchal, Kamareddy'),
+    -> ('Super Luxury 1212', 'Hyderabad', 'Nizamabad', '09:00:00', '12:00:00', 650.00, 'Super Luxury', 'Medchal, Kamareddy'),
+    -> ('Express 1313', 'Hyderabad', 'Khammam', '08:00:00', '11:00:00', 550.00, 'Express', 'Suryapet, Kodad'),
+    -> ('Rajdhani 1414', 'Hyderabad', 'Khammam', '10:00:00', '13:00:00', 700.00, 'AC Rajdhani', 'Suryapet, Kodad'),
+    -> ('Deluxe 1515', 'Hyderabad', 'Mahbubnagar', '07:15:00', '09:00:00', 300.00, 'Deluxe', 'Shamshabad, Jadcherla'),
+    -> ('e-Metro 1616', 'Hyderabad', 'Mahbubnagar', '09:30:00', '11:15:00', 400.00, 'Electric Non-AC', 'Shamshabad, Jadcherla'),
+    -> ('Super Luxury 1717', 'Hyderabad', 'Adilabad', '06:00:00', '11:30:00', 850.00, 'Super Luxury', 'Medchal, Nirmal'),
+    -> ('Express 1818', 'Hyderabad', 'Adilabad', '08:30:00', '14:00:00', 700.00, 'Express', 'Medchal, Nirmal'),
+    -> ('Express 1919', 'Hyderabad', 'Medak', '07:45:00', '09:45:00', 350.00, 'Express', 'Patancheru, Sangareddy'),
+    -> ('Super Luxury 2020', 'Hyderabad', 'Medak', '10:15:00', '12:15:00', 450.00, 'Super Luxury', 'Patancheru, Sangareddy'),
+    -> ('Deluxe 2121', 'Hyderabad', 'Rangareddy', '08:00:00', '09:30:00', 250.00, 'Deluxe', 'Kukatpally, Gachibowli'),
+    -> ('e-Metro 2222', 'Hyderabad', 'Rangareddy', '10:00:00', '11:30:00', 320.00, 'Electric Non-AC', 'Kukatpally, Gachibowli'),
+    -> ('Super Luxury 2323', 'Hyderabad', 'Karimnagar', '07:00:00', '10:00:00', 600.00, 'Super Luxury', 'Siddipet, Jammikunta'),
+    -> ('Rajdhani 2424', 'Hyderabad', 'Karimnagar', '09:30:00', '12:30:00', 750.00, 'AC Rajdhani', 'Siddipet, Jammikunta'),
+    -> ('Express 2525', 'Hyderabad', 'Nalgonda', '08:15:00', '10:45:00', 400.00, 'Express', 'Uppal, Choutuppal'),
+    -> ('Super Luxury 2626', 'Hyderabad', 'Nalgonda', '10:45:00', '13:15:00', 520.00, 'Super Luxury', 'Uppal, Choutuppal');
+Query OK, 26 rows affected (0.02 sec)
+Records: 26  Duplicates: 0  Warnings: 0
+
+mysql>  SELECT bus_name, departure_time, arrival_time, fare, bus_type, stops
+    ->                     FROM buses
+    ->                     WHERE source='Hyderabad' AND destination='Vijayawada';
++------------------+----------------+--------------+--------+--------------+---------------------------+
+| bus_name         | departure_time | arrival_time | fare   | bus_type     | stops                     |
++------------------+----------------+--------------+--------+--------------+---------------------------+
+| Express 404      | 07:00:00       | 11:30:00     | 620.00 | Express      | Nalgonda, Suryapet, Kodad |
+| Super Luxury 505 | 09:15:00       | 13:45:00     | 830.00 | Super Luxury | Nalgonda, Suryapet, Kodad |
+| Rajdhani 606     | 12:00:00       | 16:30:00     | 950.00 | AC Rajdhani  | Nalgonda, Suryapet, Kodad |
++------------------+----------------+--------------+--------+--------------+---------------------------+
+3 rows in set (0.00 sec)
